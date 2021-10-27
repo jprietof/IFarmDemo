@@ -80,6 +80,95 @@ function mostarElementos() {
     });
     
 }
+/*********************
+        CATEGORY
+**********************/
+$("#btnListCategory").on("click", function(e){
+    getCategory();
+})
+//Mostar Datos
+function getCategory(){
+    $.ajax({
+        url:"http://localhost:8080/api/Category/all",
+        type:"GET",
+        datatype:"JSON",
+        success:function(respuesta){
+            console.log(respuesta)
+            $("#tableData").html(`<thead><tr><th>nombre</th><th>descripcion</th></tr></thead><tbody>`);
+            $(respuesta).each(function(i, tutorial){
+                $('#tableData').append($("<tr>")
+                                        .append($("<td>").append(tutorial.name))
+                                        .append($("<td>").append(tutorial.description))
+                                        .append($("<td>").append(`
+                                            <button class='btn btn-primary editCat' data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" data-catid="`+tutorial.id+`"><i class="bi bi-pencil-square"></i></button>
+                                            <button class='btn btn-danger deleteCat' data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" data-catid="`+tutorial.id+`"><i class="bi bi-pencil-square"></i></button>
+                                        `)));
+                });
+                $('#tableData').append("</tbody>")
+                cargarBotones();
+        }
+    });
+}
+function cargarBotones(){
+    $(".editCat").on("click",function(e){
+        getOneCategory($($(this)[0]).data("catid"));
+            e.preventDefault();
+    });
+}
+//guardar datos
+//mostrar datos en el modal
+function getOneCategory(id){
+    console.log(id);
+    $.ajax({
+        url: 'http://localhost:8080/api/Category/'+id,
+        method: 'GET',
+        dataType: 'JSON',
+        success: function(data) {
+            $($("#uCategory")[0].catID).val(data.id);
+            $($("#uCategory")[0].uNameCat).val(data.name);
+            $($("#uCategory")[0].uCatDescript).val(data.description);
+            //$("#uCategory").show();
+            $("#exampleModal").show();
+        }
+    });
+}
+//actualizar datos categoria
+$("#putCategory").on("click", function(e){
+    let data ={
+        id:$($("#uCategory")[0].catID).val(),
+        name: $($("#uCategory")[0].uNameCat).val(),
+        description: $($("#uCategory")[0].uCatDescript).val()
+    }
+    let dataToSend=JSON.stringify(data);
+    actualizarCategoria(dataToSend);
+    e.preventDefault();
+})
+function actualizarCategoria(data){
+    $.ajax({
+        url: "http://localhost:8080/api/Category/update",
+        type: "PUT",
+        dataType: "JSON",
+        contentType:"application/JSON; charset=utf-8",
+        data:data,
+        success: function(response){
+            console.log(response);
+            getCategory();
+            alert("Se actualizo correctamente");
+            //$("#exampleModal").hide();
+            var myModalEl = document.getElementById('exampleModal');  
+            var modal = bootstrap.Modal.getInstance(myModalEl)
+            modal.hide()
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("No se puede actualizar: "+textStatus +" "+jqXHR+" "+errorThrown)
+        }
+    });
+}
+//borrar catagoria
+
+/*********************
+        FARM
+**********************/
 
 
 function traerInformacionCategorias(){

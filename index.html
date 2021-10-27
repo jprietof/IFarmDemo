@@ -5,6 +5,7 @@
     <meta name="author" content="Team G15-4 USA">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Fincas</title>
 </head>
@@ -59,7 +60,7 @@
                     <h4 class="card-title">Categorias</h4>
                     <p class="card-text">Crear y consultar categorias</p>
                     <button class="btn btn-primary" type="button" id="btnCategory">Nueva Categoria</button>
-                    <button class="btn btn-primary" type="button" id="btnListCategory">Consultar Categoria</button>
+                    <button class="btn btn-primary" type="button" id="btnListCategory"><i class="bi bi-table"></i> Consultar</button>
                 </div>
                 <div class="tab-pane fade" id="nav-message" role="tabpanel" aria-labelledby="nav-message-tab">
                     <h4 class="card-title">Mensajes</h4>
@@ -102,6 +103,89 @@
                 <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear</button>
             </div>
         </form>
+        <!--Form Create Client-->
+        <form method="post" id="newClient">
+            <h2 class="text-center"><strong>Crear</strong> Cliente</h2>
+            <div class="mb-3 form-floating">
+                <input type="text" id="nameClient" class="form-control" placeholder="name Client">
+                <label for="nameClient">Nombre</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <input type="email" id="emailClient" class="form-control" placeholder="Email">
+                <label for="emailClient">Email</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <input type="password" id="passClient" class="form-control" placeholder="Password">
+                <label for="passClient">Contraseña</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <input type="number" id="ageClient" class="form-control" placeholder="Age">
+                <label for="ageClient">Edad</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Cliente</button>
+            </div>
+        </form>
+        <!--Form Message-->
+        <form method="post" id="newMessage">
+            <h2 class="text-center"><strong>Crear</strong> Mensaje</h2>
+            <div class="mb-3 form-floating">
+                <!--<input type="text" id="smsText" class="form-control" placeholder="Mensaje">-->
+                <textarea id="smsText" class="form-control" placeholder="Message"></textarea>
+                <label for="smsText">Mensaje</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <select name="category" id="clientID" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
+                <label for="clientID">Cliente</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <select name="category" id="farmID" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
+                <label for="farmID">Finca</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear</button>
+            </div>
+        </form>
+        <!--Form Category-->
+        <form method="post" id="newCategory">
+            <h2 class="text-center"><strong>Crear</strong> Categoria</h2>
+            <div class="mb-3 form-floating">
+                <input type="text" id="nameCat" class="form-control" placeholder="name Category">
+                <label for="nameCat">Nombre</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <input type="text" id="catDescript" class="form-control" placeholder="description">
+                <label for="catDescript">Descripción</label>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Categoria</button>
+            </div>
+        </form>
+        <!--Form Reservation-->
+        <form method="post" id="newReservation">
+            <h2 class="text-center"><strong>Crear</strong> Reservación</h2>
+            <div class="mb-3 form-floating">
+                <input type="date" id="startDate" class="form-control" placeholder="Fecha de inicio">
+                <label for="startDate">Fecha de inicio</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <input type="date" id="endDate" class="form-control" placeholder="Fecha de Finalización">
+                <label for="endDate">Fecha de finalización</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <select name="category" id="idClient" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
+                <label for="idClient">Cliente</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <select name="category" id="idFarm" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
+                <label for="idFarm">Finca</label>
+            </div>
+            <div class="mb-3 form-floating">
+                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Reserva</button>
+            </div>
+        </form>
+        <!--Table show data-->
+        <table class="table" id="tableData"></table>
         <!--Form update Farm-->
         <form method="post" id="updateFarm">
             <h2 class="text-center"><strong>Actualizar</strong> Finca</h2>
@@ -130,29 +214,6 @@
                 <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
             </div>
         </form>
-        <!--Form Create Client-->
-        <form method="post" id="newClient">
-            <h2 class="text-center"><strong>Crear</strong> Cliente</h2>
-            <div class="mb-3 form-floating">
-                <input type="text" id="nameClient" class="form-control" placeholder="name Client">
-                <label for="nameClient">Nombre</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="email" id="emailClient" class="form-control" placeholder="Email">
-                <label for="emailClient">Email</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="password" id="passClient" class="form-control" placeholder="Password">
-                <label for="passClient">Contraseña</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="number" id="ageClient" class="form-control" placeholder="Age">
-                <label for="ageClient">Edad</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Cliente</button>
-            </div>
-        </form>
         <!--Form update Client-->
         <form method="post" id="updateClient">
             <h2 class="text-center"><strong>Actualizar</strong> Cliente</h2>
@@ -177,57 +238,34 @@
                 <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
             </div>
         </form>
-        <!--Form Category-->
-        <form method="post" id="newCategory">
-            <h2 class="text-center"><strong>Crear</strong> Categoria</h2>
-            <div class="mb-3 form-floating">
-                <input type="text" id="nameCat" class="form-control" placeholder="name Category">
-                <label for="nameCat">Nombre</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="text" id="catDescript" class="form-control" placeholder="description">
-                <label for="catDescript">Descripción</label>
-            </div>
-            <div class="mb-3">
-                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Categoria</button>
-            </div>
-        </form>
         <!--Form update Category-->
-        <form method="post" id="updateCategory">
-            <h2 class="text-center"><strong>Actualizar</strong> Categoria</h2>
-            <div class="mb-3 form-floating">
-                <input type="text" id="uptNameCat" class="form-control" placeholder="name Category">
-                <label for="uptNameCat">Nombre</label>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="uCategory">
+                    <div class="mb-3 form-floating">
+                        <input type="text" id="uNameCat" class="form-control" placeholder="name Category">
+                        <label for="uameCat">Nombre</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" id="uCatDescript" class="form-control" placeholder="description">
+                        <label for="uCatDescript">Descripción</label>
+                    </div>
+                    <input type="hidden" id="catID">
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="putCategory">Actualizar</button>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-floating">
-                <input type="text" id="uptCatDescript" class="form-control" placeholder="description">
-                <label for="uptCatDescript">Descripción</label>
-            </div>
-            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-center">
-                <button class="btn btn-primary w-25" type="submit">Actualizar</button>
-                <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
-            </div>
-        </form>
-        <!--Form Message-->
-        <form method="post" id="newMessage">
-            <h2 class="text-center"><strong>Crear</strong> Mensaje</h2>
-            <div class="mb-3 form-floating">
-                <!--<input type="text" id="smsText" class="form-control" placeholder="Mensaje">-->
-                <textarea id="smsText" class="form-control" placeholder="Message"></textarea>
-                <label for="smsText">Mensaje</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="clientID" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
-                <label for="clientID">Cliente</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="farmID" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
-                <label for="farmID">Finca</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear</button>
-            </div>
-        </form>
+          </div>
         <!--Form update Message-->
         <form method="post" id="updateMessage">
             <h2 class="text-center"><strong>Actualizar</strong> Mensaje</h2>
@@ -247,29 +285,6 @@
             <div class="mb-3 d-grid gap-2 d-md-flex justify-content-center">
                 <button class="btn btn-primary w-25" type="submit">Actualizar</button>
                 <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
-            </div>
-        </form>
-        <!--Form Reservation-->
-        <form method="post" id="newReservation">
-            <h2 class="text-center"><strong>Crear</strong> Reservación</h2>
-            <div class="mb-3 form-floating">
-                <input type="date" id="startDate" class="form-control" placeholder="Fecha de inicio">
-                <label for="startDate">Fecha de inicio</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="date" id="endDate" class="form-control" placeholder="Fecha de Finalización">
-                <label for="endDate">Fecha de finalización</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="idClient" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
-                <label for="idClient">Cliente</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="idFarm" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
-                <label for="idFarm">Finca</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Reserva</button>
             </div>
         </form>
         <!--Form update Reservation-->
@@ -296,8 +311,6 @@
                 <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
             </div>
         </form>
-        <!--Table-->
-        <!--Table learn more-->
     </div>
     <hr>
     <h1> Categorias</h1>
