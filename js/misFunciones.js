@@ -100,8 +100,8 @@ function getCategory(){
                                         .append($("<td>").append(tutorial.name))
                                         .append($("<td>").append(tutorial.description))
                                         .append($("<td>").append(`
-                                            <button class='btn btn-primary editCat' data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" data-catid="`+tutorial.id+`"><i class="bi bi-pencil-square"></i></button>
-                                            <button class='btn btn-danger deleteCat' data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" data-catid="`+tutorial.id+`"><i class="bi bi-pencil-square"></i></button>
+                                            <button class='btn btn-primary editCat' data-bs-toggle="modal" data-bs-target="#modalCategory" data-bs-whatever="@mdo" data-catid="`+tutorial.id+`"><i class="bi bi-pencil-square"></i></button>
+                                            <button class='btn btn-danger deleteCat' data-catid="`+tutorial.id+`"><i class="bi bi-trash-fill"></i></button>
                                         `)));
                 });
                 $('#tableData').append("</tbody>")
@@ -109,13 +109,54 @@ function getCategory(){
         }
     });
 }
+//botones para editar y eliminar
 function cargarBotones(){
     $(".editCat").on("click",function(e){
         getOneCategory($($(this)[0]).data("catid"));
             e.preventDefault();
     });
+    $(".deleteCat").on("click",function(e){
+        deleteCategory($($(this)[0]).data("catid"));
+            e.preventDefault();
+    });
 }
 //guardar datos
+$("#newCat").on("click", function(e){
+    let info={
+        name: $($("#newCategory")[0].nameCat).val(),
+        description: $($("#newCategory")[0].catDescript).val(),
+    }
+    data = JSON.stringify(info);
+    //console.log(data)
+    saveCategory(data)
+    $("#newCategory").trigger("reset");
+    e.preventDefault();
+});
+function saveCategory(data){
+    $.ajax({
+        url: 'http://localhost:8080/api/Category/save',
+        method: 'POST',
+        dataType: 'JSON',
+        contentType:"application/JSON; charset=utf-8",
+        data: data,
+        success: function(data) {
+            console.log(data);
+            //alert("Se guardo correctamente");
+            alertCategory('La categoría se creo correctamente', 'success');
+            getCategory();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alertCategory('no se puede crear la categoria', 'danger');
+            //alert("No se puede actualizar: "+textStatus +" "+jqXHR+" "+errorThrown)
+        }
+    });
+}
+function alertCategory(message, type){
+    var alertPlaceholder = document.getElementById('alertCat')
+    var wrapper = document.createElement('div')
+    wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+    alertPlaceholder.append(wrapper)
+}
 //mostrar datos en el modal
 function getOneCategory(id){
     console.log(id);
@@ -128,7 +169,7 @@ function getOneCategory(id){
             $($("#uCategory")[0].uNameCat).val(data.name);
             $($("#uCategory")[0].uCatDescript).val(data.description);
             //$("#uCategory").show();
-            $("#exampleModal").show();
+            $("#modalCategory").show();
         }
     });
 }
@@ -155,7 +196,7 @@ function actualizarCategoria(data){
             getCategory();
             alert("Se actualizo correctamente");
             //$("#exampleModal").hide();
-            var myModalEl = document.getElementById('exampleModal');  
+            var myModalEl = document.getElementById('modalCategory');  
             var modal = bootstrap.Modal.getInstance(myModalEl)
             modal.hide()
         },
@@ -165,7 +206,19 @@ function actualizarCategoria(data){
     });
 }
 //borrar catagoria
-
+function deleteCategory(id){
+    $.ajax({
+        url:"http://localhost:8080/api/Category/"+id,
+        method:"DELETE",
+        datatype:"JSON",
+        success:function(respuesta){
+            console.log(respuesta);
+            getCategory();
+            //alert("Se ha Eliminado.")
+           // getCategory();
+        }
+    });
+}
 /*********************
         FARM
 **********************/

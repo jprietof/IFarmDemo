@@ -147,7 +147,7 @@
             </div>
         </form>
         <!--Form Category-->
-        <form method="post" id="newCategory">
+        <form id="newCategory">
             <h2 class="text-center"><strong>Crear</strong> Categoria</h2>
             <div class="mb-3 form-floating">
                 <input type="text" id="nameCat" class="form-control" placeholder="name Category">
@@ -157,8 +157,9 @@
                 <input type="text" id="catDescript" class="form-control" placeholder="description">
                 <label for="catDescript">Descripción</label>
             </div>
+            <div id="alertCat"></div>
             <div class="mb-3">
-                <button class="btn btn-primary d-block w-50 mx-auto" type="submit">Crear Categoria</button>
+                <button class="btn btn-primary d-block w-50 mx-auto" type="submit" id="newCat">Crear Categoria</button>
             </div>
         </form>
         <!--Form Reservation-->
@@ -187,59 +188,83 @@
         <!--Table show data-->
         <table class="table" id="tableData"></table>
         <!--Form update Farm-->
-        <form method="post" id="updateFarm">
-            <h2 class="text-center"><strong>Actualizar</strong> Finca</h2>
-            <div class="mb-3 form-floating">
-                <input type="text" id="uptName" class="form-control" placeholder="name">
-                <label for="uptName">Nombre</label>
+        <div class="modal fade" id="modalFarm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="uFarm">
+                    <h2 class="text-center"><strong>Actualizar</strong> Finca</h2>
+                    <div class="mb-3 form-floating">
+                        <input type="text" id="uptName" class="form-control" placeholder="name">
+                        <label for="uptName">Nombre</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" id="uptAddress" class="form-control" placeholder="address">
+                        <label for="uptAddress">Dirección</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" id="uptExtension" class="form-control" placeholder="Extension">
+                        <label for="uptExtension">Extencision</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" id="uptDescription" class="form-control" placeholder="description">
+                        <label for="uptDescription">Descripción</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select name="category" id="uptCatID" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la categoria</option></select>
+                        <label for="uptCatID">Categoría</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="putFarm">Actualizar</button>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-floating">
-                <input type="text" id="uptAddress" class="form-control" placeholder="address">
-                <label for="uptAddress">Dirección</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="number" id="uptExtension" class="form-control" placeholder="Extension">
-                <label for="uptExtension">Extencision</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="text" id="uptDescription" class="form-control" placeholder="description">
-                <label for="uptDescription">Descripción</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="uptCatID" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la categoria</option></select>
-                <label for="uptCatID">Categoría</label>
-            </div>
-            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-center">
-                <button class="btn btn-primary w-25" type="submit">Actualizar</button>
-                <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
-            </div>
-        </form>
+          </div>
         <!--Form update Client-->
-        <form method="post" id="updateClient">
-            <h2 class="text-center"><strong>Actualizar</strong> Cliente</h2>
-            <div class="mb-3 form-floating">
-                <input type="text" id="uptNameClient" class="form-control" placeholder="name Client">
-                <label for="uptNameClien">Nombre</label>
+        <div class="modal fade" id="modalClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="uClient">
+                    <h2 class="text-center"><strong>Actualizar</strong> Cliente</h2>
+                    <div class="mb-3 form-floating">
+                        <input type="text" id="uptNameClient" class="form-control" placeholder="name Client">
+                        <label for="uptNameClien">Nombre</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="email" id="uptEmailClient" class="form-control" placeholder="Email">
+                        <label for="uptEmailClient">Email</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="password" id="uptPassClient" class="form-control" placeholder="Password">
+                        <label for="uptPassClient">Contraseña</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" id="uptAgeClient" class="form-control" placeholder="Age">
+                        <label for="uptAgeClient">Edad</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="putClient">Actualizar</button>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-floating">
-                <input type="email" id="uptEmailClient" class="form-control" placeholder="Email">
-                <label for="uptEmailClient">Email</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="password" id="uptPassClient" class="form-control" placeholder="Password">
-                <label for="uptPassClient">Contraseña</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <input type="number" id="uptAgeClient" class="form-control" placeholder="Age">
-                <label for="uptAgeClient">Edad</label>
-            </div>
-            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-center">
-                <button class="btn btn-primary w-25" type="submit">Actualizar</button>
-                <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
-            </div>
-        </form>
+          </div>
         <!--Form update Category-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -267,50 +292,74 @@
             </div>
           </div>
         <!--Form update Message-->
-        <form method="post" id="updateMessage">
-            <h2 class="text-center"><strong>Actualizar</strong> Mensaje</h2>
-            <div class="mb-3 form-floating">
-                <!--<input type="text" id="smsText" class="form-control" placeholder="Mensaje">-->
-                <textarea id="smsText" class="form-control" placeholder="Message"></textarea>
-                <label for="smsText">Mensaje</label>
+        <div class="modal fade" id="modalMessage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="uMessage">
+                    <h2 class="text-center"><strong>Actualizar</strong> Mensaje</h2>
+                    <div class="mb-3 form-floating">
+                        <!--<input type="text" id="smsText" class="form-control" placeholder="Mensaje">-->
+                        <textarea id="smsText" class="form-control" placeholder="Message"></textarea>
+                        <label for="smsText">Mensaje</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select name="category" id="uptClient" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
+                        <label for="uptClient">Cliente</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select name="category" id="uptFarm" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
+                        <label for="uptFarm">Finca</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="putMessage">Actualizar</button>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="uptClient" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
-                <label for="uptClient">Cliente</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="uptFarm" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
-                <label for="uptFarm">Finca</label>
-            </div>
-            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-center">
-                <button class="btn btn-primary w-25" type="submit">Actualizar</button>
-                <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
-            </div>
-        </form>
+          </div>
         <!--Form update Reservation-->
-        <form method="post" id="updateReservation">
-            <h2 class="text-center"><strong>Actualizar</strong> Reservación</h2>
-            <div class="mb-3 form-floating">
-                <input type="date" id="ustartDate" class="form-control" placeholder="Fecha de inicio">
-                <label for="ustartDate">Fecha de inicio</label>
+        <div class="modal fade" id="modalReservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="uReservation">
+                    <h2 class="text-center"><strong>Actualizar</strong> Reservación</h2>
+                    <div class="mb-3 form-floating">
+                        <input type="date" id="ustartDate" class="form-control" placeholder="Fecha de inicio">
+                        <label for="ustartDate">Fecha de inicio</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" id="uendDate" class="form-control" placeholder="Fecha de Finalización">
+                        <label for="uendDate">Fecha de finalización</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select name="category" id="uptClientt" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
+                        <label for="uptClientt">Cliente</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select name="category" id="uptFarmm" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
+                        <label for="uptFarmm">Finca</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="putReservation">Actualizar</button>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 form-floating">
-                <input type="date" id="uendDate" class="form-control" placeholder="Fecha de Finalización">
-                <label for="uendDate">Fecha de finalización</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="uptClientt" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga el cliente</option></select>
-                <label for="uptClientt">Cliente</label>
-            </div>
-            <div class="mb-3 form-floating">
-                <select name="category" id="uptFarmm" class="form-select" aria-label="Floating label Categoria ID"><option selected>Eliga la finca</option></select>
-                <label for="uptFarmm">Finca</label>
-            </div>
-            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-center">
-                <button class="btn btn-primary w-25" type="submit">Actualizar</button>
-                <button class="btn btn-secundary w-25" type="submit">Cancelar</button>
-            </div>
-        </form>
+          </div>
     </div>
     <hr>
     <h1> Categorias</h1>
