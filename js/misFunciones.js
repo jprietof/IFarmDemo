@@ -538,10 +538,10 @@ function selectClient(){
             newMessage.append("<option selected>Eliga la finca</option>");
             newReservation.append("<option selected>Eliga la finca</option>");
             $.each(respuesta, function (id, client) {
-                newMessage.append('<option value='+client.id+'>'+client.name+'</option>');
-                updateMessage.append('<option value='+client.id+'>'+client.name+'</option>');
-                newReservation.append('<option value='+client.id+'>'+client.name+'</option>');
-                updateReservataion.append('<option value='+client.id+'>'+client.name+'</option>');
+                newMessage.append('<option value='+client.idClient+'>'+client.name+'</option>');
+                updateMessage.append('<option value='+client.idClient+'>'+client.name+'</option>');
+                newReservation.append('<option value='+client.idClient+'>'+client.name+'</option>');
+                updateReservataion.append('<option value='+client.idClient+'>'+client.name+'</option>');
                 //console.log("select "+category.id);
             }); 
         }
@@ -650,8 +650,8 @@ function getMessage(){
                                         .append($("<td>").append(message.client.name))
                                         .append($("<td>").append(message.farm.name))
                                         .append($("<td>").append(`
-                                            <button class='btn btn-primary editMessage' data-bs-toggle="modal" data-bs-target="#modalMessage" data-bs-whatever="@mdo" data-messageid="`+message.id+`"><i class="bi bi-pencil-square"></i></button>
-                                            <button class='btn btn-danger deleteMessage' data-messageid="`+message.id+`"><i class="bi bi-trash-fill"></i></button>
+                                            <button class='btn btn-primary editMessage' data-bs-toggle="modal" data-bs-target="#modalMessage" data-bs-whatever="@mdo" data-messageid="`+message.idMessage+`"><i class="bi bi-pencil-square"></i></button>
+                                            <button class='btn btn-danger deleteMessage' data-messageid="`+message.idMessage+`"><i class="bi bi-trash-fill"></i></button>
                                         `)));
                 });
                 $('#tableData').append("</tbody>")
@@ -674,8 +674,8 @@ function messageBotones(){
 $("#createMessage").on("click", function(e){
     let info={
         messageText: $($("#newMessage")[0].smsText).val(),
-        farm: {id:$($("#newMessage")[0].clientID).val()},
-        client: {idClient:$($("#newMessage")[0].farmID).val()}
+        farm: {id:$($("#newMessage")[0].farmID).val()},
+        client: {idClient:$($("#newMessage")[0].clientID).val()}
     }
     data = JSON.stringify(info);
     //console.log(data)
@@ -703,7 +703,7 @@ function saveMessage(dataMessage){
     });
 }
 //mostrar datos ha actualizar en el modal
-function getOneMessge(id){
+function getOneMessage(id){
     console.log(id);
     $.ajax({
         url: 'http://localhost:8080/api/Message/'+id,
@@ -799,8 +799,8 @@ function getReservation(){
                                         .append($("<td>").append(reservation.farm.name))
                                         .append($("<td>").append(reservation.client.name))
                                         .append($("<td>").append(`
-                                            <button class='btn btn-primary editReservation' data-bs-toggle="modal" data-bs-target="#modalReservation" data-bs-whatever="@mdo" data-reservationid="`+farm.id+`"><i class="bi bi-pencil-square"></i></button>
-                                            <button class='btn btn-danger deleteReservation' data-reservationid="`+farm.id+`"><i class="bi bi-trash-fill"></i></button>
+                                            <button class='btn btn-primary editReservation' data-bs-toggle="modal" data-bs-target="#modalReservation" data-bs-whatever="@mdo" data-reservationid="`+reservation.idReservation+`"><i class="bi bi-pencil-square"></i></button>
+                                            <button class='btn btn-danger deleteReservation' data-reservationid="`+reservation.idReservation+`"><i class="bi bi-trash-fill"></i></button>
                                         `)));
                 });
                 $('#tableData').append("</tbody>")
@@ -819,13 +819,13 @@ function reservationBotones(){
             e.preventDefault();
     });
 }
-//guardar datos de finca
+//guardar datos de reservacion
 $("#createReserva").on("click", function(e){
     let info={
         startDate: $($("#newReservation")[0].startDate).val(),
         devolutionDate: $($("#newReservation")[0].endDate).val(),
-        farm: {id:$($("#newReservation")[0].idClient).val()},
-        client: {idClient:$($("#newReservation")[0].idFarm).val()}
+        farm: {id:$($("#newReservation")[0].idFarm).val()},
+        client: {idClient:$($("#newReservation")[0].idClient).val()}
     }
     data = JSON.stringify(info);
     //console.log(data)
