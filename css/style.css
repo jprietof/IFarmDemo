@@ -81,6 +81,9 @@ form .btn-secundary:hover {
   padding: 20px 0;
   background-color: #444;
   color: #fff;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
 }
 .footer-basic .copyright {
   margin-top: 15px;
