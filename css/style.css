@@ -1,3 +1,54 @@
+body {
+  background: #f1f7fc;
+}
+/*Login*/
+.login-clean {
+  /*background: #1e2833;*/
+  padding: 80px 0;
+}
+.login-clean form {
+  max-width: 320px;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 4px;
+  color: #505e6c;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+.login-clean form h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+}
+.login-clean .illustration {
+  text-align: center;
+  padding: 0 0 20px;
+  font-size: 100px;
+  /*color: rgb(244, 71, 107);*/
+  color: #1e2833;
+}
+.login-clean form .forgot {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #6f7a85;
+  opacity: 0.9;
+  text-decoration: none;
+}
+.login-clean form .btn-primary {
+  background: #1e2833;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: none;
+  margin-top: 26px;
+  text-shadow: none;
+  outline: none !important;
+}
+
 /*.header-dark {
   background: #444;
 }*/
