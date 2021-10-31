@@ -198,7 +198,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Finca</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -239,7 +239,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar Cliente</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -281,6 +281,7 @@
                 </div>
                 <div class="modal-body">
                   <form id="uCategory">
+                    <h2 class="text-center"><strong>Actualizar</strong> Categoría</h2>
                     <div class="mb-3 form-floating">
                         <input type="text" id="uNameCat" class="form-control" placeholder="name Category">
                         <label for="uameCat">Nombre</label>
@@ -344,19 +345,19 @@
                   <form id="uReservation">
                     <h2 class="text-center"><strong>Actualizar</strong> Reservación</h2>
                     <div class="mb-3 form-floating">
-                        <input type="datetime" id="ustartDate" class="form-control" placeholder="Fecha de inicio">
+                        <input type="date" id="ustartDate" class="form-control" placeholder="Fecha de inicio">
                         <label for="ustartDate">Fecha de inicio</label>
                     </div>
                     <div class="mb-3 form-floating">
-                        <input type="datetime" id="uendDate" class="form-control" placeholder="Fecha de Finalización">
+                        <input type="date" id="uendDate" class="form-control" placeholder="Fecha de Finalización">
                         <label for="uendDate">Fecha de finalización</label>
                     </div>
                     <div class="mb-3 form-floating">
-                        <select name="category" id="uptClientt" class="form-select" aria-label="Floating label Categoria ID"></select>
+                        <select name="category" id="uptClientt" class="form-select" aria-label="Floating label Categoria ID" disabled></select>
                         <label for="uptClientt">Cliente</label>
                     </div>
                     <div class="mb-3 form-floating">
-                        <select name="category" id="uptFarmm" class="form-select" aria-label="Floating label Categoria ID"></select>
+                        <select name="category" id="uptFarmm" class="form-select" aria-label="Floating label Categoria ID" disabled></select>
                         <label for="uptFarmm">Finca</label>
                     </div>
                     <input type="hidden" id="reservationID">

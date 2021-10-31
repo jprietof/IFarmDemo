@@ -173,7 +173,7 @@ function selectCategory(){
             $.each(respuesta, function (id, category) {
                 newFarm.append('<option value='+category.id+'>'+category.name+'</option>');
                 updateFarm.append('<option value='+category.id+'>'+category.name+'</option>');
-                console.log("select "+category.id);
+                //console.log("select "+category.id);
             }); 
         }
     })
@@ -356,7 +356,7 @@ function selectFarm(){
                 updateMessage.append('<option value='+farm.id+'>'+farm.name+'</option>');
                 newReservation.append('<option value='+farm.id+'>'+farm.name+'</option>');
                 updateReservataion.append('<option value='+farm.id+'>'+farm.name+'</option>');
-                console.log("select "+farm.name);
+                //console.log("select "+farm.name);
             }); 
         }
     })
@@ -387,7 +387,7 @@ function getOneFarm(id){
         }
     });
 }
-//actualizar datos categoria
+//actualizar datos finca
 $("#putFarm").on("click", function(e){
     let data ={
         id: $($("#uFarm")[0].farmsID).val(),
@@ -489,7 +489,7 @@ function clientBotones(){
             e.preventDefault();
     });
 }
-//guardar datos de finca
+//guardar datos de cliente
 $("#createClient").on("click", function(e){
     let info={
         email: $($("#newClient")[0].emailClient).val(),
@@ -773,7 +773,7 @@ function deleteMessage(id){
 
 $("#btnListReservation").on("click", function(e){
     getReservation();
-    $("#tableData").toggle();
+    $("#tableData").show();
     ocultarElementos();
 })
 //Mostar Datos de Reservaciones
@@ -794,8 +794,8 @@ function getReservation(){
                                         <tbody>`);
             $(respuesta).each(function(i, reservation){
                 $('#tableData').append($("<tr>")
-                                        .append($("<td>").append(reservation.startDate))
-                                        .append($("<td>").append(reservation.devolutionDate))
+                                        .append($("<td>").append(dateReservation(reservation.startDate)))
+                                        .append($("<td>").append(dateReservation(reservation.devolutionDate)))
                                         .append($("<td>").append(reservation.farm.name))
                                         .append($("<td>").append(reservation.client.name))
                                         .append($("<td>").append(`
@@ -862,14 +862,33 @@ function getOneReservation(id){
         dataType: 'JSON',
         success: function(data) {
             $($("#uReservation")[0].reservationID).val(data.idReservation);
-            $($("#uReservation")[0].ustartDate).val(data.startDate);
-            $($("#uReservation")[0].uendDate).val(data.devolutionDate);
+            $($("#uReservation")[0].ustartDate).val(dateReservation(data.startDate));
+            $($("#uReservation")[0].uendDate).val(dateReservation(data.devolutionDate));
             $($("#uReservation")[0].uptFarmm).val(data.farm.id).change();
             $($("#uReservation")[0].uptClientt).val(data.client.idClient).change();
-            //$("#uCategory").show();
             $("#modalReservation").show();
         }
     });
+}
+//mostrar solo la fecha
+function dateReservation(date){
+    let fecha = new Date(date);
+    let year = fecha.getUTCFullYear();
+    let mes = fecha.getUTCMonth()+1;
+    let day="";
+    let month="";
+    if(fecha.getUTCDate().toString().length==1){
+        day="0"+fecha.getUTCDate().toString();
+    }else{
+        day=fecha.getUTCDate();
+    }
+    if(mes.toString().length==1){
+        month="0"+mes;
+    }else{
+        month=mes;
+    }
+    let fulldate = year+"-"+month+"-"+day;
+    return fulldate;
 }
 //actualizar datos de reservación
 $("#putReservation").on("click", function(e){
@@ -877,8 +896,8 @@ $("#putReservation").on("click", function(e){
         idReservation: $($("#uReservation")[0].reservationID).val(),
         startDate:$($("#uReservation")[0].ustartDate).val(),
         devolutionDate:$($("#uReservation")[0].uendDate).val(),
+        client:{idClient:$($("#uReservation")[0].uptClientt).val()},
         farm:{id:$($("#uReservation")[0].uptFarmm).val()},
-        client:{idClient:$($("#uReservation")[0].uptClientt).val()}
     }
     let dataToSend=JSON.stringify(data);
     actualizarReservation(dataToSend);
@@ -895,7 +914,6 @@ function actualizarReservation(data){
             console.log(response);
             getReservation();
             alert("Se actualizo correctamente");
-            //$("#exampleModal").hide();
             var myModalEl = document.getElementById('modalReservation');  
             var modal = bootstrap.Modal.getInstance(myModalEl)
             modal.hide()
@@ -905,7 +923,7 @@ function actualizarReservation(data){
         }
     });
 }
-//borrar finca
+//Borrar Reservación
 function deleteReservation(id){
     $.ajax({
         url:"http://localhost:8080/api/Reservation/"+id,
