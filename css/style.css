@@ -1,6 +1,10 @@
 body {
   background: #f1f7fc;
 }
+#imagen {
+  width: 30px;
+  height: 30px;
+}
 /*Login*/
 .login-clean {
   /*background: #1e2833;*/
@@ -44,9 +48,15 @@ body {
   border-radius: 4px;
   padding: 11px;
   box-shadow: none;
-  margin-top: 26px;
+  width: 60%;
+  /*margin-top: 26px;*/
+  margin: 26px auto;
   text-shadow: none;
   outline: none !important;
+}
+.login-clean form .btn-primary a {
+  text-decoration: none;
+  color: #fff;
 }
 
 /*.header-dark {

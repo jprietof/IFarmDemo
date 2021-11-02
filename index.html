@@ -10,26 +10,27 @@
     <title>Fincas</title>
 </head>
 <body>
-    <header class="header-dark">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="#">Fincas USA</a>
-                <button data-bs-toggle="collapse" data-bs-target="#navcol-1" class="navbar-toggler">
-                    <span class="visually-hidden">Toggle navigation</span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            
-            <div class="collapse navbar-collapse">
-                <span class="navbar-text">
-                    <a class="login" href="#">log In</a>
-                </span>
-            </div>
-        </nav>
-        <div class="col-md-8 offset-md-2">
-            <h1 class="text-center">Alquiler de fincas</h1>
-        </div>
-    </header>
+    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+    	<div class="container-fluid">
+    		<h2>Farm</h2>
+        	<ul class="navbar-nav flex-nowrap ms-auto">
+            	<div class="d-none d-sm-block topbar-divider"></div>
+            	<li class="nav-item dropdown no-arrow">
+                	<div class="nav-item dropdown no-arrow">
+                		<a aria-expanded="false" data-bs-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                			<span class="d-none d-lg-inline me-2 text-gray-600 small" id="user">User</span>
+                			<img id="imagen" class="prueba border rounded-circle img-profile float-left" src="https://cdn.pixabay.com/photo/2016/11/21/14/53/man-1845814_960_720.jpg"/>
+                		</a>
+                   		<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#">
+                   			<i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> </a><a class="dropdown-item" href="#">       
+                        	<div class="dropdown-divider"></div>
+                        	<a class="logout dropdown-item" href="http://localhost:8080/"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
+                    	</div>
+                	</div>
+            	</li>
+        	</ul>
+   	 	</div>
+	</nav>
     <!--Card navigation-->
     <div class="container hero">
         <div class="card">
@@ -372,9 +373,11 @@
           </div>
     </div>
     <!--Pie de página-->
-    <footer class="footer-basic">
-        <p class="copyright">USA | MinTic ©2021</p>
-    </footer>
+    <footer class="bg-white sticky-footer fixed-bottom">
+    	<div class="container my-auto">
+        	<div class="text-center my-auto copyright"><span>Copyright © jprietof | USA 2021</span></div>
+    	</div>
+	</footer>
     <!--Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
