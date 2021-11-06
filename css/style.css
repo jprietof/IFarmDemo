@@ -5,6 +5,46 @@ body {
   width: 30px;
   height: 30px;
 }
+.gradient {
+  /*background: linear-gradient(120deg, #140a6b, #e8ecee);*/
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(137, 8, 72, 1) 100%,
+    rgba(0, 212, 255, 1) 100%,
+    rgba(9, 45, 121, 1) 100%
+  );
+  color: #fff;
+}
+.nav2 {
+  background: #18bc9c;
+}
+.nav2 ul li a {
+  color: #f1f7fc;
+  font-weight: bold;
+}
+.nombre {
+  color: #1e2833;
+  font-weight: bold;
+}
+.col-auto {
+  flex: 0 0 auto;
+  width: auto;
+}
+.check,
+.cancel {
+  font-size: 30px;
+}
+.check {
+  color: #1daa3b !important;
+}
+.cancel {
+  color: #a30202 !important;
+}
+#user {
+  color: #f1f7fc;
+  font-weight: bold;
+}
 /*Login*/
 .login-clean {
   /*background: #1e2833;*/

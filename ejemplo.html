@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/reportes.js"></script>  
+    <title>Reportes </title>
+</head>
+
+<h1> Reportes Tutoria Viernes Noche</h1>
+
+<button onclick="traerReporteStatus()"> Generar Reporte Status Reservas </button>
+<div id="resultadoStatus"></div>
+
+
+
+<input type="date" id="RstarDate" placeholder="descripcion">
+<input type="date" id="RdevolutionDate" placeholder="descripcion">
+<button onclick="traerReporteDate()"> Generar Reporte por fecha </button>
+<div id="resultadoDate"></div>
+
+<button onclick="traerReporteClientes()"> Generar Reporte Clientes y Cantidad de reservas por cliente </button>
+<div id="resultadoClientes"></div>
+<script>
+    
+function traerReporteStatus(){
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/report-status",
+        type:"GET",
+        datatype:"JSON",
+        success:function(respuesta){
+            console.log(respuesta);
+            pintarRespuesta(respuesta);
+        }
+    });
+}
+
+function pintarRespuesta(respuesta){
+
+    let myTable="<table>";
+    myTable+="<tr>";
+       myTable+="<th>completadas</th>";
+        myTable+="<td>"+respuesta.completed+"</td>";
+        myTable+="<th>canceladas</th>";
+        myTable+="<td>"+respuesta.cancelled+"</td>";
+        myTable+="</tr>";
+    myTable+="</table>";
+    $("#resultadoStatus").html(myTable);
+}
+function traerReporteDate(){
+    
+   
+
+    var fechaInicio = document.getElementById("RstarDate").value;
+    var fechaCierre = document.getElementById("RdevolutionDate").value;
+  console.log(fechaInicio);
+  console.log(fechaCierre);
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/report-dates/"+fechaInicio+"/"+fechaCierre,
+        type:"GET",
+        datatype:"JSON",
+        success:function(respuesta){
+            console.log(respuesta);
+            pintarRespuestaDate(respuesta);
+        }
+    });
+}
+function pintarRespuestaDate(respuesta){
+    let contador=0
+    let myTable="<table>";
+    myTable+="<tr>";
+      
+    for(i=0;i<respuesta.length;i++){
+    contador +=1;
+    myTable+="<th>total</th>";
+        myTable+="<td>"+respuesta[i].devolutionDate+"</td>";
+        myTable+="<td>"+respuesta[i].startDate+"</td>";
+        myTable+="<td>"+respuesta[i].status+"</td>";
+      
+      
+        myTable+="</tr>";
+    }
+    myTable+="</table>";
+    $("#resultadoDate").html(myTable);
+    console.log(contador)
+}
+
+
+function traerReporteClientes(){
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/report-clients",
+        type:"GET",
+        datatype:"JSON",
+        success:function(respuesta){
+            console.log(respuesta);
+            pintarRespuestaClientes(respuesta);
+        }
+    });
+}
+
+function pintarRespuestaClientes(respuesta){
+
+    let myTable="<table>";
+    myTable+="<tr>";
+      
+    for(i=0;i<respuesta.length;i++){
+    myTable+="<th>total</th>";
+        myTable+="<td>"+respuesta[i].total+"</td>";
+        myTable+="<td>"+respuesta[i].client.name+"</td>";
+        myTable+="<td>"+respuesta[i].client.email+"</td>";
+        myTable+="<td>"+respuesta[i].client.age+"</td>";
+      
+        myTable+="</tr>";
+    }
+    myTable+="</table>";
+    $("#resultadoClientes").html(myTable);
+}
+</script>
+</body>
+
+</html>
